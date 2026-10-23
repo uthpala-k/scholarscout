@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Marie Skłodowska-Curie Postdoctoral Fellowship",
+    "institution": "Various Universities, European Union",
+    "level": "Postdoc",
+    "funding": "Fully Funded (Salary + Mobility Allowance)",
+    "stipend": "€4,000 - €5,500/month",
+    "deadline": "2027-09-15",
+    "startDate": "2028-01-01",
+    "region": "Europe",
+    "international": "Yes",
+    "contact": "EU Funding Portal",
+    "keywords": "Environmental Engineering, Climate Change, All Fields",
+    "link": "https://marie-sklodowska-curie-actions.ec.europa.eu/"
+  },
+  {
+    "title": "MEXT Scholarship for Masters and PhD",
+    "institution": "University of Tokyo & Others, Japan",
+    "level": "Masters",
+    "funding": "Fully Funded (Tuition + Flight + Stipend)",
+    "stipend": "¥144,000/month",
+    "deadline": "2027-05-15",
+    "startDate": "2028-04-01",
+    "region": "Asia",
+    "international": "Yes",
+    "contact": "Local Japanese Embassy",
+    "keywords": "Engineering, Data Science, Biology, Environmental Engineering",
+    "link": "https://www.mext.go.jp/en/"
+  },
+  {
+    "title": "Knight-Hennessy Scholars Program",
+    "institution": "Stanford University, USA",
+    "level": "PhD",
+    "funding": "Fully Funded (Tuition + Living + Travel)",
+    "stipend": "$40,000/year",
+    "deadline": "2027-10-10",
+    "startDate": "2028-09-01",
+    "region": "North America",
+    "international": "Yes",
+    "contact": "khscholars@stanford.edu",
+    "keywords": "Machine Learning, Artificial Intelligence, Sustainability",
+    "link": "https://knight-hennessy.stanford.edu/"
+  }
+]

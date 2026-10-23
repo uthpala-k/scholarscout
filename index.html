@@ -15,7 +15,7 @@
             <div class="flex items-baseline space-x-2">
                 <i class="fa-solid fa-graduation-cap text-2xl"></i>
                 <h1 class="text-2xl font-bold tracking-wide">ScholarScout</h1>
-                <span class="text-xs text-blue-300 font-mono bg-blue-800 px-2 py-0.5 rounded">v2.1.1</span>
+                <span class="text-xs text-blue-300 font-mono bg-blue-800 px-2 py-0.5 rounded">v3.0.0</span>
             </div>
             <p class="hidden sm:block text-sm text-blue-200">Your portal to fully funded academic positions</p>
         </div>
@@ -31,11 +31,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Area of Interest (Keywords)</label>
-                        <input type="text" id="keywords" required placeholder="e.g., Machine Learning, Climate Change" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="text" id="keywords" placeholder="e.g., Environmental Engineering, Data Science" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Position Level</label>
                         <select id="level" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="Any">Any Level</option>
                             <option value="Masters">Masters (Fully Funded)</option>
                             <option value="PhD">PhD (Fully Funded)</option>
                             <option value="Postdoc">Postdoc Fellowship</option>
@@ -44,35 +45,24 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Expected Country or Region</label>
-                        <input type="text" id="location" required placeholder="e.g., Europe, Canada, USA, Japan" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="text" id="location" placeholder="e.g., Europe, Japan, USA (Leave blank for all)" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Expected Starting Date</label>
                         <div class="flex items-center space-x-3">
-                            <input type="date" id="startDate" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none flex-grow">
-                            <label class="flex items-center space-x-2 text-sm whitespace-nowrap bg-gray-100 px-3 py-2 rounded-md cursor-pointer">
-                                <input type="checkbox" id="anytimeCheck" class="form-checkbox h-4 w-4 text-blue-600 rounded">
+                            <input type="date" id="startDate" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none flex-grow" disabled>
+                            <label class="flex items-center space-x-2 text-sm whitespace-nowrap bg-gray-200 px-3 py-2 rounded-md cursor-pointer">
+                                <input type="checkbox" id="anytimeCheck" class="form-checkbox h-4 w-4 text-blue-600 rounded" checked>
                                 <span>Anytime</span>
                             </label>
                         </div>
                     </div>
                 </div>
                 <button type="submit" id="searchBtn" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-md transition duration-200 flex justify-center items-center">
-                    <span id="btnText">Search the Web</span>
-                    <i id="btnIcon" class="fa-solid fa-arrow-right ml-2"></i>
+                    <span id="btnText">Search Database</span>
+                    <i id="btnIcon" class="fa-solid fa-database ml-2"></i>
                 </button>
             </form>
-            
-            <!-- Progress Bar Section -->
-            <div id="progressContainer" class="hidden mt-6">
-                <div class="flex justify-between text-sm font-medium text-blue-800 mb-2">
-                    <span id="progressText">Initializing search protocols...</span>
-                    <span id="progressPercent">0%</span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
-                    <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
-                </div>
-            </div>
         </div>
 
         <!-- Dynamic Controls & Results Section -->
@@ -98,11 +88,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Error Banner -->
-            <div id="errorBanner" class="hidden p-4 mb-4 bg-red-100 text-red-700 border border-red-200 rounded-md text-sm"></div>
             
-            <!-- Cards Container -->
             <div id="resultsContent" class="space-y-4"></div>
         </div>
     </main>
@@ -110,20 +96,16 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-8 mt-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <!-- About & Disclaimers -->
             <div class="text-center md:text-left">
                 <h4 class="text-lg font-bold text-white mb-2">ScholarScout</h4>
                 <p class="text-sm mb-2">Created by: <strong>Uthpala Kaushalya</strong></p>
                 <p class="text-xs text-gray-400 mb-2 leading-relaxed">
-                    <strong>Disclaimer:</strong> ScholarScout uses AI to search and summarize scholarship data. Always verify deadlines and funding on official institution websites before applying.
+                    <strong>Disclaimer:</strong> Always verify deadlines and funding on official institution websites before applying.
                 </p>
                 <p class="text-xs text-gray-400">
-                    <strong>Acknowledgements:</strong> Powered by Gemini API, Cloudflare, and Tailwind CSS.
+                    <strong>Acknowledgements:</strong> Powered by Cloudflare and Tailwind CSS.
                 </p>
             </div>
-
-            <!-- Links & History -->
             <div class="text-center md:text-left flex flex-col justify-center">
                 <h4 class="text-lg font-bold text-white mb-3">Resources</h4>
                 <ul class="space-y-2 text-sm">
@@ -131,8 +113,6 @@
                     <li><a href="guide.html" target="_blank" class="text-blue-400 hover:text-blue-300 underline"><i class="fa-solid fa-book-open mr-1"></i> How to use (Guide)</a></li>
                 </ul>
             </div>
-
-            <!-- Counters -->
             <div class="flex justify-center md:justify-end items-center space-x-6">
                 <div class="flex flex-col items-center">
                     <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-1 font-bold">Page Visits</span>
@@ -147,9 +127,8 @@
     </footer>
 
     <script>
-        let globalOpportunities = [];
-        let progressInterval;
-        let textInterval;
+        let fullDatabase = [];
+        let filteredResults = [];
 
         const anytimeCheck = document.getElementById('anytimeCheck');
         const dateInput = document.getElementById('startDate');
@@ -158,150 +137,57 @@
             if(e.target.checked) dateInput.value = '';
         });
 
-        const progressPhrases = [
-            "Initializing secure search connection...",
-            "Scanning global university databases...",
-            "Filtering for fully funded opportunities...",
-            "Analyzing stipends and deadlines...",
-            "Bypassing generic results...",
-            "Formatting academic records...",
-            "Finalizing your opportunities..."
-        ];
-
-        // Advanced Auto-Retry Fetch Wrapper
-        async function fetchWithRetry(prompt, maxRetries = 3) {
-            for (let i = 0; i < maxRetries; i++) {
-                try {
-                    const response = await fetch('/api/search', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                    });
-
-                    const rawText = await response.text();
-                    let data;
-
-                    try {
-                        data = JSON.parse(rawText);
-                    } catch (parseError) {
-                        if (rawText.includes('524') || response.status === 524) throw new Error("524");
-                        if (rawText.includes('high demand') || response.status === 503) throw new Error("503");
-                        throw new Error("Parse Error");
-                    }
-
-                    if (data.error) {
-                        if (data.error.message.includes("high demand") || data.error.code === 503) throw new Error("503");
-                        throw new Error(`Google API Error: ${data.error.message}`);
-                    }
-                    
-                    return data; // Success!
-
-                } catch (error) {
-                    if ((error.message === "524" || error.message === "503") && i < maxRetries - 1) {
-                        document.getElementById('progressText').innerText = `Network busy. Auto-retrying attempt ${i + 2} of ${maxRetries}...`;
-                        await new Promise(res => setTimeout(res, 2500)); // Wait 2.5s before retrying
-                        continue;
-                    }
-                    
-                    if (error.message === "524") throw new Error("Cloudflare 524 Timeout: The web search took too long. Please try fewer keywords.");
-                    if (error.message === "503") throw new Error("Google API is experiencing high demand. Please try again later.");
-                    if (error.message === "Parse Error") throw new Error("The AI returned unreadable data due to a connection drop. Please search again.");
-                    throw error;
-                }
-            }
-        }
-
+        // Load the database instantly when a search is triggered
         document.getElementById('searchForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const btnText = document.getElementById('btnText');
-            const btnIcon = document.getElementById('btnIcon');
-            const searchBtn = document.getElementById('searchBtn');
             const resultsContainer = document.getElementById('resultsContainer');
-            const errorBanner = document.getElementById('errorBanner');
-            const resultsContent = document.getElementById('resultsContent');
             const controlsContainer = document.getElementById('controlsContainer');
-            const progressContainer = document.getElementById('progressContainer');
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
-            const progressPercent = document.getElementById('progressPercent');
-
-            errorBanner.classList.add('hidden');
-            resultsContent.innerHTML = '';
-            controlsContainer.classList.add('hidden');
-            resultsContainer.classList.add('hidden');
-            btnText.innerText = "Scouting the web...";
-            btnIcon.className = "fa-solid fa-circle-notch fa-spin ml-2";
-            searchBtn.disabled = true;
-
-            progressContainer.classList.remove('hidden');
-            let width = 0;
-            let phraseIndex = 0;
-            progressText.innerText = progressPhrases[0];
-            progressPercent.innerText = "0%";
-            progressBar.style.width = "0%";
-
-            progressInterval = setInterval(() => {
-                if (width < 95) {
-                    width += Math.random() * 5 + 2; 
-                    if (width > 95) width = 95;
-                    progressBar.style.width = width + "%";
-                    progressPercent.innerText = Math.floor(width) + "%";
-                }
-            }, 600);
-
-            textInterval = setInterval(() => {
-                phraseIndex = (phraseIndex + 1) % progressPhrases.length;
-                if (!progressText.innerText.includes("Auto-retrying")) {
-                    progressText.innerText = progressPhrases[phraseIndex];
-                }
-            }, 2500);
-
-            const keywords = document.getElementById('keywords').value;
-            const level = document.getElementById('level').value;
-            const location = document.getElementById('location').value;
-            const date = anytimeCheck.checked ? "Anytime" : document.getElementById('startDate').value;
-
-            // Simplified prompt optimized for speed and strict JSON parsing
-            const prompt = `Return a JSON array of 3 objects representing fully funded academic opportunities. 
-            Criteria: Keywords: ${keywords} | Level: ${level} | Location: ${location} | Date: ${date}.
-            Keys per object: "title", "institution", "funding", "stipend", "deadline", "startDate", "region", "international", "contact", "keywords", "link".`;
+            
+            // Gather search parameters
+            const keywordInput = document.getElementById('keywords').value.toLowerCase().trim();
+            const levelInput = document.getElementById('level').value;
+            const locationInput = document.getElementById('location').value.toLowerCase().trim();
+            const dateInputVal = document.getElementById('startDate').value;
+            const isAnytime = anytimeCheck.checked;
 
             try {
-                const data = await fetchWithRetry(prompt, 3);
-                
-                let aiResponse = data.candidates[0].content.parts[0].text;
-                aiResponse = aiResponse.replace(/```json/gi, '').replace(/```/g, '').trim();
-                
-                globalOpportunities = JSON.parse(aiResponse);
-                
-                clearInterval(progressInterval);
-                clearInterval(textInterval);
-                progressBar.style.width = "100%";
-                progressPercent.innerText = "100%";
-                progressText.innerText = "Results found!";
+                // Fetch the static JSON file
+                const response = await fetch('data.json');
+                fullDatabase = await response.json();
 
-                setTimeout(() => {
-                    progressContainer.classList.add('hidden');
-                    populateRegions();
-                    renderResults();
-                    resultsContainer.classList.remove('hidden');
-                    controlsContainer.classList.remove('hidden');
-                    document.getElementById('searchCounterImg').src = "https://visitor-badge.laobi.icu/badge?page_id=scholarscout.searches&time=" + new Date().getTime();
-                }, 500);
+                // Instantly filter the database
+                filteredResults = fullDatabase.filter(opp => {
+                    const matchKeyword = !keywordInput || 
+                        opp.keywords.toLowerCase().includes(keywordInput) || 
+                        opp.title.toLowerCase().includes(keywordInput) || 
+                        opp.institution.toLowerCase().includes(keywordInput);
+                    
+                    const matchLevel = levelInput === "Any" || opp.level.includes(levelInput) || levelInput.includes(opp.level);
+                    
+                    const matchLocation = !locationInput || 
+                        opp.region.toLowerCase().includes(locationInput) || 
+                        opp.institution.toLowerCase().includes(locationInput);
+                    
+                    let matchDate = true;
+                    if (!isAnytime && dateInputVal && opp.startDate) {
+                        matchDate = new Date(opp.startDate) >= new Date(dateInputVal);
+                    }
+
+                    return matchKeyword && matchLevel && matchLocation && matchDate;
+                });
+
+                populateRegions();
+                renderResults();
+                
+                resultsContainer.classList.remove('hidden');
+                controlsContainer.classList.remove('hidden');
+                document.getElementById('searchCounterImg').src = "https://visitor-badge.laobi.icu/badge?page_id=scholarscout.searches&time=" + new Date().getTime();
 
             } catch (error) {
-                clearInterval(progressInterval);
-                clearInterval(textInterval);
-                progressContainer.classList.add('hidden');
-                
-                errorBanner.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i><strong>Error:</strong> ${error.message}`;
-                errorBanner.classList.remove('hidden');
+                console.error("Failed to load database:", error);
+                document.getElementById('resultsContent').innerHTML = `<div class="p-4 bg-red-100 text-red-700 rounded">Error loading the database. Make sure data.json exists and is properly formatted.</div>`;
                 resultsContainer.classList.remove('hidden');
-            } finally {
-                btnText.innerText = "Search the Web";
-                btnIcon.className = "fa-solid fa-arrow-right ml-2";
-                searchBtn.disabled = false;
             }
         });
 
@@ -312,29 +198,29 @@
         dateSort.addEventListener('change', renderResults);
 
         function populateRegions() {
-            const regions = new Set(globalOpportunities.map(o => o.region).filter(Boolean));
+            const regions = new Set(filteredResults.map(o => o.region).filter(Boolean));
             regionFilter.innerHTML = '<option value="All">All Regions</option>' + 
                 Array.from(regions).map(r => `<option value="${r}">${r}</option>`).join('');
         }
 
         function renderResults() {
             const resultsContent = document.getElementById('resultsContent');
-            let filtered = [...globalOpportunities];
+            let displayData = [...filteredResults];
 
-            if (regionFilter.value !== 'All') filtered = filtered.filter(o => o.region === regionFilter.value);
+            if (regionFilter.value !== 'All') displayData = displayData.filter(o => o.region === regionFilter.value);
 
             if (dateSort.value === 'asc') {
-                filtered.sort((a, b) => new Date(a.startDate || '2099-01-01') - new Date(b.startDate || '2099-01-01'));
+                displayData.sort((a, b) => new Date(a.startDate || '2099-01-01') - new Date(b.startDate || '2099-01-01'));
             } else if (dateSort.value === 'desc') {
-                filtered.sort((a, b) => new Date(b.startDate || '1970-01-01') - new Date(a.startDate || '1970-01-01'));
+                displayData.sort((a, b) => new Date(b.startDate || '1970-01-01') - new Date(a.startDate || '1970-01-01'));
             }
 
-            if (filtered.length === 0) {
-                resultsContent.innerHTML = `<div class="p-4 bg-gray-100 text-gray-600 rounded">No opportunities match your current filter.</div>`;
+            if (displayData.length === 0) {
+                resultsContent.innerHTML = `<div class="p-6 text-center bg-gray-100 text-gray-600 rounded-lg">No exact matches found in the current database. Try broadening your keywords or location.</div>`;
                 return;
             }
 
-            resultsContent.innerHTML = filtered.map(opp => `
+            resultsContent.innerHTML = displayData.map(opp => `
                 <div class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow">
                     <h4 class="text-lg sm:text-xl font-bold text-blue-900 mb-2 leading-tight">
                         <a href="${opp.link}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800 transition-colors inline-flex items-center">
@@ -354,7 +240,7 @@
                     
                     <div class="bg-gray-50 p-3 rounded text-xs sm:text-sm space-y-1">
                         <p><strong class="text-gray-900">Keywords:</strong> <span class="text-gray-600">${opp.keywords}</span></p>
-                        <p><strong class="text-gray-900">Contact/Supervisor:</strong> <span class="text-gray-600">${opp.contact}</span></p>
+                        <p><strong class="text-gray-900">Contact:</strong> <span class="text-gray-600">${opp.contact}</span></p>
                     </div>
                 </div>
             `).join('');
