@@ -1,12 +1,20 @@
 export async function onRequestPost({ request, env }) {
   try {
-    const body = await request.text();
+    const reqBody = await request.json();
     
-    // Locked to Google's current active model: gemini-3.8-flash
+    // Inject strict JSON mode and lower temperature for faster processing
+    const payload = {
+      contents: reqBody.contents,
+      generationConfig: {
+        responseMimeType: "application/json",
+        temperature: 0.2
+      }
+    };
+
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${env.GEMINI_API_KEY}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: body
+      body: JSON.stringify(payload)
     });
 
     const textData = await response.text();
