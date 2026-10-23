@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use ScholarScout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col font-sans text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white p-4 shadow-md">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-baseline space-x-2 hover:opacity-80">
+                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                <h1 class="text-2xl font-bold tracking-wide">ScholarScout</h1>
+            </a>
+            <a href="index.html" class="text-sm text-blue-200 hover:text-white underline"><i class="fa-solid fa-arrow-left mr-1"></i> Back to Search</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl mx-auto w-full p-6 lg:p-8 mt-6">
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+            <h2 class="text-2xl font-bold text-blue-900 mb-6 border-b pb-2"><i class="fa-solid fa-book-open mr-2"></i>How to Use ScholarScout</h2>
+            
+            <div class="space-y-6 text-gray-700">
+                <section>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">1. Enter Your Keywords</h3>
+                    <p>Type up to 5 specific keywords representing your research interests (e.g., <em>"Machine Learning, Climate Change, Data Science"</em>). The more specific you are, the better the AI can narrow down fully funded opportunities.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">2. Define Your Criteria</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Position Level:</strong> Select whether you are looking for a Masters, PhD, Postdoc, or Faculty position.</li>
+                        <li><strong>Region:</strong> Specify a country (e.g., "Japan") or a broader region (e.g., "Europe", "Anywhere").</li>
+                        <li><strong>Start Date:</strong> Pick a date to find positions starting *after* that timeline, or check "Anytime" for rolling applications.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">3. Filtering & Sorting Results</h3>
+                    <p>Once the search is complete, use the gray control bar above the results to instantly filter the generated cards by Region or sort them by their expected Start Date.</p>
+                </section>
+
+                <section class="bg-blue-50 p-4 rounded-md border border-blue-100 mt-4">
+                    <h3 class="text-md font-bold text-blue-900 mb-1"><i class="fa-solid fa-circle-info mr-1"></i> Note on AI Limitations</h3>
+                    <p class="text-sm text-blue-800">ScholarScout searches the live web using Google Gemini. If you encounter a <strong>Cloudflare 524 Timeout</strong> or <strong>High Demand Error</strong>, it means the AI took more than 10 seconds to read the web data. Simply wait a few moments and click search again with fewer keywords to speed up the process.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
