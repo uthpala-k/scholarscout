@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Version History - ScholarScout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col font-sans text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white p-4 shadow-md">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-baseline space-x-2 hover:opacity-80">
+                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                <h1 class="text-2xl font-bold tracking-wide">ScholarScout</h1>
+            </a>
+            <a href="index.html" class="text-sm text-blue-200 hover:text-white underline"><i class="fa-solid fa-arrow-left mr-1"></i> Back to Search</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl mx-auto w-full p-6 lg:p-8 mt-6">
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+            <h2 class="text-2xl font-bold text-blue-900 mb-6 border-b pb-2">Documentation & Version History</h2>
+            
+            <ul class="space-y-6">
+                <li>
+                    <h3 class="text-lg font-bold text-gray-800"><span class="text-blue-600 font-mono bg-blue-50 px-2 py-1 rounded">v2.0.0 (Current)</span></h3>
+                    <p class="text-gray-600 mt-2">Major UI overhaul. Transitioned AI response to structured JSON for faster generation to prevent 524 timeouts. Added advanced filtering and sorting. Redesigned result cards with native links. Improved mobile responsiveness and counter alignment.</p>
+                </li>
+                <li>
+                    <h3 class="text-lg font-bold text-gray-800"><span class="text-gray-600 font-mono bg-gray-100 px-2 py-1 rounded">v1.1.0</span></h3>
+                    <p class="text-gray-600 mt-2">Migrated to secure serverless API, added "Anytime" date toggle, added basic error handling.</p>
+                </li>
+                <li>
+                    <h3 class="text-lg font-bold text-gray-800"><span class="text-gray-600 font-mono bg-gray-100 px-2 py-1 rounded">v1.0.0</span></h3>
+                    <p class="text-gray-600 mt-2">Initial beta release with direct API integration.</p>
+                </li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

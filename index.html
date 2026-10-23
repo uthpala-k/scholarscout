@@ -6,7 +6,6 @@
     <title>ScholarScout - Find Funded Academic Opportunities</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col font-sans text-gray-800">
 
@@ -16,7 +15,7 @@
             <div class="flex items-baseline space-x-2">
                 <i class="fa-solid fa-graduation-cap text-2xl"></i>
                 <h1 class="text-2xl font-bold tracking-wide">ScholarScout</h1>
-                <span class="text-xs text-blue-300 font-mono bg-blue-800 px-2 py-0.5 rounded">v1.1.0</span>
+                <span class="text-xs text-blue-300 font-mono bg-blue-800 px-2 py-0.5 rounded">v2.0.0</span>
             </div>
             <p class="hidden sm:block text-sm text-blue-200">Your portal to fully funded academic positions</p>
         </div>
@@ -29,15 +28,11 @@
         <div class="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-100">
             <h2 class="text-xl font-semibold mb-4 text-blue-900 border-b pb-2"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search Opportunities</h2>
             <form id="searchForm" class="space-y-5">
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <!-- Keywords -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Area of Interest (Up to 5 Keywords)</label>
                         <input type="text" id="keywords" required placeholder="e.g., Machine Learning, Climate Change, Biology" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
-
-                    <!-- Level -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Position Level</label>
                         <select id="level" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
@@ -47,14 +42,10 @@
                             <option value="Academic Position">Academic / Faculty Position</option>
                         </select>
                     </div>
-
-                    <!-- Country/Region -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Expected Country or Region</label>
                         <input type="text" id="location" required placeholder="e.g., Europe, Canada, USA, Japan, Anywhere" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
-
-                    <!-- Date Selection -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Expected Starting Date</label>
                         <div class="flex items-center space-x-3">
@@ -64,10 +55,8 @@
                                 <span>Anytime</span>
                             </label>
                         </div>
-                        <p class="text-xs text-gray-500 mt-1" id="dateHelperText">Searching for positions starting after the selected date.</p>
                     </div>
                 </div>
-
                 <button type="submit" id="searchBtn" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-md transition duration-200 flex justify-center items-center">
                     <span id="btnText">Search the Web</span>
                     <i id="btnIcon" class="fa-solid fa-arrow-right ml-2"></i>
@@ -75,163 +64,230 @@
             </form>
         </div>
 
-        <!-- Results Section -->
+        <!-- Dynamic Controls & Results Section -->
         <div id="resultsContainer" class="hidden">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Search Results</h3>
-            <div id="resultsContent" class="bg-white rounded-xl shadow-lg p-6 border border-gray-100 prose max-w-none">
-                <!-- Results will be injected here -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-3 md:mb-0">Search Results</h3>
+                
+                <!-- Sort & Filter UI -->
+                <div id="controlsContainer" class="hidden flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 bg-gray-200 p-2 rounded-md">
+                    <div class="flex items-center">
+                        <label class="text-sm font-semibold text-gray-700 mr-2">Region:</label>
+                        <select id="regionFilter" class="border-gray-300 rounded text-sm p-1 outline-none">
+                            <option value="All">All Regions</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center">
+                        <label class="text-sm font-semibold text-gray-700 mr-2">Sort by Date:</label>
+                        <select id="dateSort" class="border-gray-300 rounded text-sm p-1 outline-none">
+                            <option value="none">Default</option>
+                            <option value="asc">Earliest First</option>
+                            <option value="desc">Latest First</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Banner -->
+            <div id="errorBanner" class="hidden p-4 mb-4 bg-red-100 text-red-700 border border-red-200 rounded-md"></div>
+            
+            <!-- Cards Container -->
+            <div id="resultsContent" class="space-y-4">
+                <!-- Javascript will inject beautiful HTML cards here -->
             </div>
         </div>
-
     </main>
 
-    <!-- Footer & Documentation -->
+    <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-8 mt-12">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <!-- Creator & Disclaimers -->
-            <div>
-                <h4 class="text-lg font-bold text-white mb-3">About ScholarScout</h4>
-                <p class="text-sm mb-2">Created by: <strong>[Your Name Here]</strong></p>
-                <p class="text-xs text-gray-400 mb-2">
-                    <strong>Disclaimer:</strong> ScholarScout uses AI (powered by Google Gemini) to search, aggregate, and summarize scholarship and academic job data from across the web. Always verify deadlines, funding status, and requirements on the official university or institution websites before applying.
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <!-- Creator & Info -->
+            <div class="text-center md:text-left">
+                <h4 class="text-lg font-bold text-white mb-2">ScholarScout</h4>
+                <p class="text-sm mb-2">Created by: <strong>Uthpala Kaushalya</strong></p>
+                <p class="text-xs text-gray-400 mb-3">
+                    <strong>Disclaimer:</strong> Always verify deadlines and funding on official institution websites.
                 </p>
-                <p class="text-xs text-gray-400">
-                    <strong>Acknowledgements:</strong> Powered by Gemini API, Cloudflare Pages, and Tailwind CSS.
-                </p>
+                <a href="history.html" class="text-sm text-blue-400 hover:text-blue-300 underline"><i class="fa-solid fa-clock-rotate-left mr-1"></i>View Version History</a>
             </div>
 
-            <!-- Documentation & History -->
-            <div>
-                <h4 class="text-lg font-bold text-white mb-3">Documentation & History</h4>
-                <ul class="text-sm space-y-2">
-                    <li><span class="text-blue-400 font-mono">v1.1.0 (Current)</span> - Migrated to secure serverless API, added "Anytime" date toggle, added error handling.</li>
-                    <li><span class="text-gray-500 font-mono">v1.0.0</span> - Initial beta release with direct API integration.</li>
-                    <li><a href="#" class="text-blue-400 hover:underline">How to use ScholarScout (Guide)</a></li>
-                </ul>
-            </div>
-
-            <!-- Counters (Very Right Bottom) -->
-            <div class="flex flex-col items-end justify-end space-y-3">
-                <div class="text-right">
-                    <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Total Page Visits</p>
-                    <img src="https://visitor-badge.laobi.icu/badge?page_id=scholarscout.main" alt="Visitor Badge">
+            <!-- Perfectly Aligned Counters -->
+            <div class="flex justify-center md:justify-end space-x-6">
+                <div class="flex flex-col items-center">
+                    <span class="text-xs uppercase tracking-wider text-gray-400 mb-1">Page Visits</span>
+                    <img src="https://visitor-badge.laobi.icu/badge?page_id=scholarscout.main" alt="Visitor Badge" class="h-5">
                 </div>
-                <div class="text-right">
-                    <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">Total Searches Performed</p>
-                    <img src="https://visitor-badge.laobi.icu/badge?page_id=scholarscout.searches" alt="Searches Badge" id="searchCounterImg">
+                <div class="flex flex-col items-center">
+                    <span class="text-xs uppercase tracking-wider text-gray-400 mb-1">Searches</span>
+                    <img src="https://visitor-badge.laobi.icu/badge?page_id=scholarscout.searches" alt="Searches Badge" id="searchCounterImg" class="h-5">
                 </div>
             </div>
-            
         </div>
     </footer>
 
     <script>
-        // Date Toggle Logic
-        const dateInput = document.getElementById('startDate');
-        const anytimeCheck = document.getElementById('anytimeCheck');
-        const dateHelperText = document.getElementById('dateHelperText');
+        let globalOpportunities = []; // Holds the JSON array of results
 
+        // Date Toggle
+        const anytimeCheck = document.getElementById('anytimeCheck');
+        const dateInput = document.getElementById('startDate');
         anytimeCheck.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                dateInput.disabled = true;
-                dateInput.value = '';
-                dateHelperText.innerText = "Searching for positions available at any time.";
-            } else {
-                dateInput.disabled = false;
-                dateHelperText.innerText = "Searching for positions starting after the selected date.";
-            }
+            dateInput.disabled = e.target.checked;
+            if(e.target.checked) dateInput.value = '';
         });
 
-        // Form Submit Logic
+        // Search Submission
         document.getElementById('searchForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // UI Loading State
-            const searchBtn = document.getElementById('searchBtn');
             const btnText = document.getElementById('btnText');
             const btnIcon = document.getElementById('btnIcon');
+            const searchBtn = document.getElementById('searchBtn');
             const resultsContainer = document.getElementById('resultsContainer');
+            const errorBanner = document.getElementById('errorBanner');
             const resultsContent = document.getElementById('resultsContent');
+            const controlsContainer = document.getElementById('controlsContainer');
 
-            const originalBtnText = btnText.innerText;
+            // Reset UI
+            errorBanner.classList.add('hidden');
+            resultsContent.innerHTML = '';
+            controlsContainer.classList.add('hidden');
             btnText.innerText = "Scouting the web...";
             btnIcon.className = "fa-solid fa-circle-notch fa-spin ml-2";
             searchBtn.disabled = true;
-            searchBtn.classList.add('opacity-75');
 
-            // Gather Data
             const keywords = document.getElementById('keywords').value;
             const level = document.getElementById('level').value;
             const location = document.getElementById('location').value;
-            const date = anytimeCheck.checked ? "Anytime" : "Starting after " + document.getElementById('startDate').value;
+            const date = anytimeCheck.checked ? "Anytime" : document.getElementById('startDate').value;
 
-            // Construct AI Search Prompt
-            const prompt = `You are ScholarScout, an advanced academic search engine. A user is looking for academic opportunities with these criteria:
-            - Keywords: ${keywords}
-            - Level: ${level}
-            - Location: ${location}
-            - Start Date: ${date}
-
-            Please search your knowledge base and the web to find 3 to 5 highly relevant, realistic, and fully funded (if applicable) opportunities. 
-            For EACH opportunity, use Markdown formatting and strictly include:
-            1. **Opportunity Name**
-            2. **Institution Name & Country**
-            3. **Funding Status** (e.g., Fully Funded, Stipend + Tuition, etc.)
-            4. **Stipend and Benefits** (give estimates if exact is unknown)
-            5. **Keyword Area**
-            6. **Professor/Supervisor Name(s)** (if applicable)
-            7. **Application Deadline**
-            8. **International Applicant Eligibility** (Yes/No)
-            9. **Contact Email** 
-            10. **Application Link or Web Portal** (Provide a real URL to the university department or scholarship portal).
-
-            Be highly organized, professional, and clear. Start directly with the results.`;
+            // Updated Prompt to enforce strict JSON array output for speed and organization
+            const prompt = `Search the web for 3 fully funded academic opportunities matching:
+            Keywords: ${keywords} | Level: ${level} | Location: ${location} | Start Date: ${date}.
+            
+            Respond ONLY with a raw, valid JSON array of 3 objects. Do not wrap it in markdown blockquotes like \`\`\`json. 
+            Each object MUST have these exact keys:
+            "title" (Opportunity Name),
+            "institution" (Institution and Country),
+            "funding" (Funding Status Details),
+            "stipend" (Stipend/Benefits estimates),
+            "deadline" (Application Deadline - use YYYY-MM-DD format if possible),
+            "startDate" (Expected start date - use YYYY-MM-DD or 'Anytime'),
+            "region" (Name of Continent/Region, e.g., Europe, Asia),
+            "international" (Yes/No),
+            "contact" (Professor name or Email),
+            "keywords" (Brief keyword tags),
+            "link" (Real URL to apply or department portal).`;
 
             try {
-                // Securely call the Cloudflare Function
                 const response = await fetch('/api/search', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }]
-                    })
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
                 });
 
-                const data = await response.json();
-                
-                // Catch actual API errors instead of breaking
-                if (data.error) {
-                    throw new Error(`Google API Error: ${data.error.message}`);
-                }
-                if (!data.candidates || data.candidates.length === 0) {
-                    throw new Error("No results returned. Double-check your Cloudflare GEMINI_API_KEY secret.");
+                const rawText = await response.text();
+                let data;
+
+                // Handle Cloudflare 524 Error gracefully
+                try {
+                    data = JSON.parse(rawText);
+                } catch (parseError) {
+                    if (rawText.includes('524') || response.status === 524) {
+                        throw new Error("The AI timed out (Cloudflare 524). Please try fewer keywords to speed up the search.");
+                    } else {
+                        throw new Error("The AI returned unreadable data. Please click search again.");
+                    }
                 }
 
-                // Parse AI response
-                const answerText = data.candidates[0].content.parts[0].text;
+                if (data.error) throw new Error(`Google API Error: ${data.error.message}`);
                 
-                // Display Results
-                resultsContent.innerHTML = marked.parse(answerText);
+                // Clean markdown from AI's JSON if they accidentally included it
+                let aiResponse = data.candidates[0].content.parts[0].text;
+                aiResponse = aiResponse.replace(/```json/gi, '').replace(/```/g, '').trim();
+                
+                globalOpportunities = JSON.parse(aiResponse);
+                
+                // Show UI controls and render initial cards
+                populateRegions();
+                renderResults();
                 resultsContainer.classList.remove('hidden');
+                controlsContainer.classList.remove('hidden');
 
-                // Trigger a "search counter" update by reloading the counter image secretly
+                // Update search counter
                 document.getElementById('searchCounterImg').src = "https://visitor-badge.laobi.icu/badge?page_id=scholarscout.searches&time=" + new Date().getTime();
 
             } catch (error) {
-                resultsContent.innerHTML = `<div class="p-4 bg-red-100 text-red-700 rounded-md border border-red-200">
-                    <i class="fa-solid fa-triangle-exclamation mr-2"></i> 
-                    <strong>Error:</strong> ${error.message}
-                </div>`;
+                errorBanner.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i><strong>Error:</strong> ${error.message}`;
+                errorBanner.classList.remove('hidden');
                 resultsContainer.classList.remove('hidden');
             } finally {
-                // Restore Button State
-                btnText.innerText = originalBtnText;
+                btnText.innerText = "Search the Web";
                 btnIcon.className = "fa-solid fa-arrow-right ml-2";
                 searchBtn.disabled = false;
-                searchBtn.classList.remove('opacity-75');
             }
         });
+
+        // Filter and Sort Logic
+        const regionFilter = document.getElementById('regionFilter');
+        const dateSort = document.getElementById('dateSort');
+
+        regionFilter.addEventListener('change', renderResults);
+        dateSort.addEventListener('change', renderResults);
+
+        function populateRegions() {
+            const regions = new Set(globalOpportunities.map(o => o.region).filter(Boolean));
+            regionFilter.innerHTML = '<option value="All">All Regions</option>' + 
+                Array.from(regions).map(r => `<option value="${r}">${r}</option>`).join('');
+        }
+
+        function renderResults() {
+            const resultsContent = document.getElementById('resultsContent');
+            let filtered = [...globalOpportunities];
+
+            // Apply Region Filter
+            if (regionFilter.value !== 'All') {
+                filtered = filtered.filter(o => o.region === regionFilter.value);
+            }
+
+            // Apply Date Sorting
+            if (dateSort.value === 'asc') {
+                filtered.sort((a, b) => new Date(a.startDate || '2099-01-01') - new Date(b.startDate || '2099-01-01'));
+            } else if (dateSort.value === 'desc') {
+                filtered.sort((a, b) => new Date(b.startDate || '1970-01-01') - new Date(a.startDate || '1970-01-01'));
+            }
+
+            if (filtered.length === 0) {
+                resultsContent.innerHTML = `<div class="p-4 bg-gray-100 text-gray-600 rounded">No opportunities match your current filter.</div>`;
+                return;
+            }
+
+            // Generate Beautiful HTML Cards
+            resultsContent.innerHTML = filtered.map(opp => `
+                <div class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-blue-900 mb-2">
+                        <a href="${opp.link}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800 transition-colors flex items-center">
+                            ${opp.title} <i class="fa-solid fa-arrow-up-right-from-square text-sm ml-2"></i>
+                        </a>
+                    </h4>
+                    <p class="text-gray-700 font-semibold mb-4 border-b pb-2"><i class="fa-solid fa-building-columns text-gray-400 mr-2"></i>${opp.institution}</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mb-4">
+                        <p><strong class="text-gray-900">Funding:</strong> <span class="text-gray-700">${opp.funding}</span></p>
+                        <p><strong class="text-gray-900">Stipend:</strong> <span class="text-green-700 font-medium">${opp.stipend}</span></p>
+                        <p><strong class="text-gray-900">Deadline:</strong> <span class="text-red-600 font-medium">${opp.deadline}</span></p>
+                        <p><strong class="text-gray-900">Start Date:</strong> <span class="text-gray-700">${opp.startDate}</span></p>
+                        <p><strong class="text-gray-900">Region:</strong> <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs ml-1">${opp.region}</span></p>
+                        <p><strong class="text-gray-900">International Allowed:</strong> <span class="text-gray-700">${opp.international}</span></p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-3 rounded text-sm space-y-1">
+                        <p><strong class="text-gray-900">Keywords:</strong> <span class="text-gray-600">${opp.keywords}</span></p>
+                        <p><strong class="text-gray-900">Contact/Supervisor:</strong> <span class="text-gray-600">${opp.contact}</span></p>
+                    </div>
+                </div>
+            `).join('');
+        }
     </script>
 </body>
 </html>

@@ -2,16 +2,16 @@ export async function onRequestPost({ request, env }) {
   try {
     const body = await request.text();
     
-    // Updated to use the recommended gemini-3.8-flash model
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${env.GEMINI_API_KEY}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: body
     });
 
-    const data = await response.json();
+    // Read response as raw text first so we don't crash on Cloudflare 524 HTML payloads
+    const textData = await response.text();
 
-    return new Response(JSON.stringify(data), {
+    return new Response(textData, {
       status: response.status,
       headers: { 
         'Content-Type': 'application/json',
